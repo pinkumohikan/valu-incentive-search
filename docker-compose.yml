@@ -8,6 +8,15 @@ services:
     networks:
       - valu-incentive-search
 
+  queue-worker:
+    image: valu-incentive-search_app
+    entrypoint: ""
+    command: "php artisan queue:work --delay=3600 --tries=2 --timeout=30"
+    depends_on:
+      - app
+    networks:
+      - valu-incentive-search
+
 networks:
   valu-incentive-search:
     driver: bridge
