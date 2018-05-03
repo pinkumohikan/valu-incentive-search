@@ -5,8 +5,6 @@
 @section('description', 'あなたにピッタリな『VALUの優待』が見つかります')
 
 @section('main-content')
-    @include('component.incentive-cards-slider', ['title' => 'ピックアップ', 'incentives' => $pickupIncentives])
-
     @include('component.incentive-cards-slider', ['title' => '人気', 'incentives' => $popularIncentives])
 
     @include('component.incentive-cards-slider', ['title' => '新着', 'incentives' => $newlyIncentives])

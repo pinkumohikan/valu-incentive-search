@@ -28,7 +28,6 @@ class AppServiceProvider extends ServiceProvider
         \View::composer('index', function () {
             $finder = resolve(Finder::class);
             assert($finder instanceof Finder);
-            \View::share('pickupIncentives', $finder->findPickup());
             \View::share('newlyIncentives', $finder->findNewly());
             \View::share('popularIncentives', $finder->findPopular());
             \View::share('endNearlyIncentives', $finder->findPeriodEndNearly());

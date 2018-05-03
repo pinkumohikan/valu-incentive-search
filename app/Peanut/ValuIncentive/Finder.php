@@ -2,36 +2,10 @@
 
 namespace Peanut\ValuIncentive;
 
-use Carbon\Carbon;
 use Illuminate\Support\Collection;
-use Peanut\ValuOwner\ValuOwner;
 
 class Finder
 {
-    const PICKUP_TARGET_USER_IDS = ['pinkumohikan']; // TODO: 変更しやすいように
-    const CACHE_KEY_PICKUP = 'ValuIncentive::Cache';
-    const CACHE_EXPIRE_MINUTE_PICKUP = 360;
-
-    public function findPickup()
-    {
-        $cachedIncentiveIds = \Cache()->get(self::CACHE_KEY_PICKUP);
-        if ($cachedIncentiveIds) {
-            return ValuIncentive::whereIn('id', $cachedIncentiveIds)
-                ->inRandomOrder()
-                ->get();
-        }
-
-        $valuOwnerIds = ValuOwner::whereIn('valu_user_id', self::PICKUP_TARGET_USER_IDS)
-            ->get()
-            ->pluck('id');
-        $pickups = $this->findLatestByOnwerIds($valuOwnerIds)
-            ->shuffle()
-            ->take(10);
-        \Cache()->put(self::CACHE_KEY_PICKUP, $pickups->pluck('id'), Carbon::now()->addMinutes(self::CACHE_EXPIRE_MINUTE_PICKUP));
-
-        return $pickups;
-    }
-
     public function findNewly(int $limit = 10)
     {
         return ValuIncentive::join('display_permissions', 'valu_incentives.valu_owner_id', 'display_permissions.valu_owner_id')
