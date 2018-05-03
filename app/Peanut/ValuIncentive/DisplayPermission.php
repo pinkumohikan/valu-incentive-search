@@ -17,10 +17,4 @@ class DisplayPermission extends Model
     {
         return $this->belongsTo(ValuOwner::class);
     }
-
-    public static function exists(ValuOwner $owner): bool
-    {
-        return self::where('valu_owner_id', $owner->id)
-            ->exists();
-    }
 }

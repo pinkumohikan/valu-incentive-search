@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Jobs\IncentiveLoad;
+use App\Jobs\LoadIncentive;
 use Illuminate\Http\Request;
 use Peanut\Valu\NotFoundException;
 use Peanut\Valu\OwnerLoader;
 use Peanut\ValuIncentive\DisplayPermission;
+use Peanut\ValuOwner\ValuOwner;
 
 class DisplayPermissionController
 {
@@ -25,30 +26,27 @@ class DisplayPermissionController
         $loader = resolve(OwnerLoader::class);
         assert($loader instanceof OwnerLoader);
 
-        try {
-            $valuOwner = $loader->load($valuUserId);
-        } catch (NotFoundException $e) {
-            return response()->json([
-                'status' => 'error',
-                'error'  => 'valu user not found',
-            ], 400);
+        $valuOwner = ValuOwner::where('valu_user_id', $valuUserId)->first();
+        if (is_null($valuOwner)) {
+            try {
+                $valuOwner = $loader->load($valuUserId);
+            } catch (NotFoundException $e) {
+                return response()->json([
+                    'status' => 'error',
+                    'error'  => 'valu user not found',
+                ], 400);
+            }
         }
 
-        $alreadyExists = DisplayPermission::exists($valuOwner);
-        if ($alreadyExists) {
-            // 準異常状態だが、クライアント側でその旨を表示する理由もないので200を返す
-            return response()->json([
-                'status' => 'already permitted',
+        if (!$valuOwner->displayPermission) {
+            DisplayPermission::create([
+                'valu_owner_id' => $valuOwner->id,
+                'ip_address'    => $_SERVER['REMOTE_ADDR'],
+                'user_agent'    => $_SERVER['HTTP_USER_AGENT'],
             ]);
         }
 
-        DisplayPermission::create([
-            'valu_owner_id' => $valuOwner->id,
-            'ip_address'    => $_SERVER['REMOTE_ADDR'],
-            'user_agent'    => $_SERVER['HTTP_USER_AGENT'],
-        ]);
-
-        //dispatch(new IncentiveLoad($valuUserId)); // FIXME
+        dispatch(new LoadIncentive($valuOwner));
 
         return response()->json([
             'status' => 'ok',

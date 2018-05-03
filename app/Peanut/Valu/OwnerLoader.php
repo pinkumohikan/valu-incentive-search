@@ -46,6 +46,7 @@ class OwnerLoader
             $selfIntroduction = $dom->filter(".summary")->text();
             $iconUrl = $this->extractIconUrl($dom->filter(".va-img-thumb-cropped__inner")->attr('style'));
         } catch (\InvalidArgumentException $e) {
+            // 例外をLogicExceptionに統一するためwrapする
             throw new \LogicException('failed to dom parsing.', $e->getCode(), $e);
         }
 

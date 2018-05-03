@@ -11,8 +11,7 @@ class ValuIncentive extends Model
         'valu_owner_id',
         'name',
         'description',
-        'target_va_lower',
-        'target_va_upper',
+        'condition',
         'registered_at',
         'period_start_at',
         'period_end_at',
@@ -30,13 +29,14 @@ class ValuIncentive extends Model
         return self::updateOrCreate(
             [
                 'valu_owner_id'     => $this->valu_owner_id,
-                'name'              => $this->name,
+                'image_url'         => $this->image_url,
             ],
             $this->toArray()
         );
     }
 
-    public function getImageUrl()
+    // TODO: 実装精査 (過渡期のコードが残ってる?)
+    public function getImageUrl(): string
     {
         if ($this->thumbnail) {
             return 'data:image/png;base64,'.$this->thumbnail;

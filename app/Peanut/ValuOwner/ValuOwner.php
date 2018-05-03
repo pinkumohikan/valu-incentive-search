@@ -3,6 +3,8 @@
 namespace Peanut\ValuOwner;
 
 use Illuminate\Database\Eloquent\Model;
+use Peanut\ValuIncentive\DisplayPermission;
+use Peanut\ValuIncentive\ValuIncentive;
 
 class ValuOwner extends Model
 {
