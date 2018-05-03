@@ -9,6 +9,8 @@ COPY ./docker_files/nginx/ /etc/nginx
 RUN ln -sf /dev/stdout /var/log/nginx/access.log \
     && ln -sf /dev/stderr /var/log/nginx/error.log
 
+ENV COMPOSER_ALLOW_SUPERUSER = 1
+
 WORKDIR /workspace
 COPY ./ .
 RUN make -f prod.mk setup
