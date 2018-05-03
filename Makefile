@@ -1,4 +1,4 @@
-APP_IMAGE_NAME=valu-incentive-search_app
+APP_IMAGE_NAME=peanut-app
 
 .PHONY: dev/* prod/* sh tinker exec
 

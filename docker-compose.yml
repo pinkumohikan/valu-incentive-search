@@ -3,6 +3,7 @@ version: '2'
 services:
   app:
     build: ./
+    image: peanut-app:latest
     ports:
       - "8000:80"
     networks:
@@ -10,7 +11,7 @@ services:
     restart: always
 
   queue-worker:
-    image: valu-incentive-search_app
+    image: peanut-app:latest
     entrypoint: ""
     command: "php artisan queue:work --delay=3600 --tries=2 --timeout=30"
     depends_on:
