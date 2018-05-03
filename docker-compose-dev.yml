@@ -17,10 +17,10 @@ services:
   app:
     volumes:
       - "./:/workspace" # コード変更を即座に反映させるため
-    restart: no
+    restart: "no"
 
   queue-worker:
-    restart: no
+    restart: "no"
 
 networks:
   valu-incentive-search:
