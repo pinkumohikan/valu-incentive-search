@@ -19,6 +19,4 @@ COPY ./ .
 RUN make -f prod.mk setup
 RUN chown -R nginx:nginx *
 
-EXPOSE 80
-
 ENTRYPOINT ["./docker_files/entry_point.sh"]
