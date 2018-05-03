@@ -9,6 +9,9 @@ COPY ./docker_files/nginx/ /etc/nginx
 RUN ln -sf /dev/stdout /var/log/nginx/access.log \
     && ln -sf /dev/stderr /var/log/nginx/error.log
 
+RUN apk add --no-cache libpng-dev && \
+    docker-php-ext-install gd
+
 ENV COMPOSER_ALLOW_SUPERUSER = 1
 
 WORKDIR /workspace
