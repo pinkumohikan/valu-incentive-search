@@ -1,4 +1,4 @@
-APP_IMAGE_NAME=peanut-app
+SERVICE_LABEL=com.pinkumohikan.valu-incentive-search.service
 
 .PHONY: dev/* prod/* sh tinker exec
 
@@ -28,7 +28,7 @@ tinker:
 
 exec: cmd=
 exec:
-	docker exec -it $(shell docker ps -q --filter "ancestor=$(APP_IMAGE_NAME)" --last 1) $(cmd)
+	docker exec -it $(shell docker ps -q --filter "label=$(SERVICE_LABEL)=app") $(cmd)
 
 .env.prod:
 	echo "[ACTION REQUIRED] prepare .env.prod file." && exit 1

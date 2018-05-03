@@ -4,6 +4,8 @@ services:
   app:
     build: ./
     image: peanut-app:latest
+    labels:
+      com.pinkumohikan.valu-incentive-search.service: app
     ports:
       - "8000:80"
     networks:
