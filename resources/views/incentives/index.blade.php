@@ -53,7 +53,7 @@ $title = $incentive->name;
                                 職業: {{ $incentive->valuOwner->job }}
                             </li>
                             <li>
-                                ウォッチ登録: {{ $incentive->valuOwner->detail->watcher_count }}人
+                                ウォッチ登録: {{ $incentive->valuOwner->watcher_count }}人
                             </li>
                         </ul>
                     </div>
