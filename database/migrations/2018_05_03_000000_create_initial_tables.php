@@ -80,7 +80,7 @@ class CreateIntialTables extends Migration
 
         Schema::dropIfExists('jobs');
 
-        Schema::drop('valu_incentives');
+        Schema::dropIfExists('valu_incentives');
 
         Schema::dropIfExists('display_permissions');
 
