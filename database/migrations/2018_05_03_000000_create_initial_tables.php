@@ -14,8 +14,8 @@ class CreateInitialTables extends Migration
             $table->string('name');
             $table->unsignedInteger('watcher_count');
             $table->string('job')->nullable();
-            $table->string('twitter_screen_name')->nullable();
             $table->text('self_introduction')->nullable();
+            $table->string('icon_url')->nullable();
             $table->timestamps();
             $table->unique('valu_user_id');
         });
