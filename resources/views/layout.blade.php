@@ -391,13 +391,13 @@
 
             $.ajax({
                 type: 'post',
-                url: '/display-permission',
+                url: '/api/display-permissions',
                 data: {
                     user_id: $(this).find('input').val()
                 }
             }).done(function () {
                 $message.addClass('text-success');
-                $message.html('優待情報の取込予約を行いました！<br>通常、1分程度で掲載が始まりますが、負荷状況により時間がかかる場合があります。');
+                $message.html('優待情報の取込予約を行いました！<br>通常、10秒程度で掲載が始まりますが負荷状況により時間がかかる場合があります。');
 
             }).fail(function (xhr) {
                 $submitBotton.attr('disabled', false);

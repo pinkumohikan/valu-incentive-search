@@ -26,14 +26,4 @@ class ValuOwner extends Model
     {
         return $this->hasOne(DisplayPermission::class);
     }
-
-    public function store(string $valuUserId): self
-    {
-        return self::updateOrCreate(
-            [
-                'valu_user_id' => $valuUserId
-            ],
-            $this->toArray()
-        );
-    }
 }
