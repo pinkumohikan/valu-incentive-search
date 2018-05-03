@@ -5,7 +5,7 @@ APP_IMAGE_NAME=peanut-app
 dev/up:
 	cp .env.dev .env
 	docker-compose -f docker-compose.yml -f docker-compose-dev.yml up -d --build
-	$(MAKE) exec cmd="php artisan migrate"
+	$(MAKE) exec cmd="php artisan migrate --force"
 
 dev/down:
 	docker-compose -f docker-compose.yml -f docker-compose-dev.yml down
@@ -14,7 +14,7 @@ dev/down:
 prod/up: .env.prod
 	cp .env.prod .env
 	docker-compose -f docker-compose.yml up -d --build
-	$(MAKE) exec cmd="php artisan migrate"
+	$(MAKE) exec cmd="php artisan migrate --force"
 
 prod/down:
 	docker-compose -f docker-compose.yml down
