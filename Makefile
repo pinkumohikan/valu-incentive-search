@@ -3,12 +3,17 @@
 
 up:
 	docker-compose -f docker-compose.yml -f docker-compose-dev.yml up -d --build
+	$(MAKE) exec cmd="php artisan migrate"
 
 down:
 	docker-compose -f docker-compose.yml -f docker-compose-dev.yml down
 
 sh:
-	docker exec -it $(shell docker ps -q --filter "ancestor=valu-incentive-search_app") sh
+	$(MAKE) exec cmd="sh"
 
 tinker:
-	docker exec -it $(shell docker ps -q --filter "ancestor=valu-incentive-search_app") php artisan tinker
+	$(MAKE) exec cmd="php artisan tinker"
+
+exec: cmd=
+exec:
+	docker exec -it $(shell docker ps -q --filter "ancestor=valu-incentive-search_app") $(cmd)

@@ -9,3 +9,6 @@ composer.phar:
 .env:
 	cp .env.example .env
 
+
+migrate:
+	php artisan migrate
