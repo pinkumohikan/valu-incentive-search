@@ -21,14 +21,15 @@ prod/down:
 
 
 sh:
-	$(MAKE) exec cmd="sh"
+	$(MAKE) exec docker-opt="-it" cmd="sh"
 
 tinker:
-	$(MAKE) exec cmd="php artisan tinker"
+	$(MAKE) exec docker-opt="-it" cmd="php artisan tinker"
 
+exec: docker-opt=
 exec: cmd=
 exec:
-	docker exec -it $(shell docker ps -q --filter "label=$(SERVICE_LABEL)=app") $(cmd)
+	docker exec $(docker-opt) $(shell docker ps -q --filter "label=$(SERVICE_LABEL)=app") $(cmd)
 
 .env.prod:
 	echo "[ACTION REQUIRED] prepare .env.prod file." && exit 1
