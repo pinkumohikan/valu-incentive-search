@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  dev-db:
+    build: ./dev-database
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: 1
+      MYSQL_DATABASE: valu-incentive-search
+      MYSQL_USER: valu-incentive-search-user
+      MYSQL_PASSWORD: valu-incentive-search-pass
+      TZ: "Asia/Tokyo"
+    ports:
+      - "13306:3306"
+    networks:
+      - valu-incentive-search
+
+networks:
+  valu-incentive-search:
+    driver: bridge
