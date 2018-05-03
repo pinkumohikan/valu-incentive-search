@@ -24,12 +24,7 @@ $title = $incentive->name;
                 <h3>行使条件</h3>
                 <ul>
                     <li>
-                        必要VA数:
-                        @if ($incentive->target_va_lower)
-                            {{ $incentive->target_va_lower }}VA ~ {{ $incentive->target_va_upper }}VA
-                        @else
-                            1VA ~
-                        @endif
+                        条件: {{ $incentive->condition }}
                     </li>
                     <li>
                         提供終了日: {{ $incentive->period_end_at }}
@@ -50,7 +45,7 @@ $title = $incentive->name;
                                 <strong>{{ $incentive->valuOwner->name }}</strong>
                             </li>
                             <li>
-                                職業: {{ $incentive->valuOwner->job }}
+                                カテゴリ: {{ $incentive->valuOwner->job }}
                             </li>
                             <li>
                                 ウォッチ登録: {{ $incentive->valuOwner->watcher_count }}人
