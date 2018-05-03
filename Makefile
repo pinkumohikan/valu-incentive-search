@@ -16,4 +16,4 @@ tinker:
 
 exec: cmd=
 exec:
-	docker exec -it $(shell docker ps -q --filter "ancestor=valu-incentive-search_app") $(cmd)
+	docker exec -it $(shell docker ps -q --filter "ancestor=valu-incentive-search_app" --last 1) $(cmd)
