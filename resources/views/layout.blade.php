@@ -93,16 +93,6 @@
             word-break: break-all;
             -ms-word-break: break-all;
         }
-        .incentive-card .va-badge {
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 60px;
-            line-height: 1.75em;
-            background-color: #007bff;
-            border-radius: 0.75em;
-            opacity: 0.8;
-        }
         .popover-header {
             color: #000;
         }
