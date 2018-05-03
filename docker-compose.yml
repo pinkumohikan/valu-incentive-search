@@ -7,6 +7,7 @@ services:
       - "8000:80"
     networks:
       - valu-incentive-search
+    restart: always
 
   queue-worker:
     image: valu-incentive-search_app
@@ -16,6 +17,7 @@ services:
       - app
     networks:
       - valu-incentive-search
+    restart: always
 
 networks:
   valu-incentive-search:

@@ -1,14 +1,7 @@
 .PHONY: setup
 
-setup: composer.phar .env
+setup: composer.phar
 	./composer.phar install --no-dev --prefer-dist --optimize-autoloader --no-interaction
 
 composer.phar:
 	./script/setup-composer.sh
-
-.env:
-	cp .env.example .env
-
-
-migrate:
-	php artisan migrate
