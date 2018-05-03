@@ -197,7 +197,7 @@
 <main class="container">
 
     <div class="search-box">
-        <form class="search-form form-inline" method="get" action="/search">
+        <form class="search-form form-inline" method="get" action="/incentives/search">
             <div class="form-group">
                 <input type="search" class="form-control-plaintext" id="keyword" name="keyword" value="" placeholder="キーワード" autofocus required minlength="1" maxlength="50">
             </div>
@@ -209,7 +209,7 @@
             </li>
             <li class="list-inline-item">
                 @foreach ($suggestedKeywords as $keyword)
-                    <a href="/search?keyword={{ $keyword }}"><u>{{ $keyword }}</u></a>
+                    <a href="/incentives/search?keyword={{ $keyword }}"><u>{{ $keyword }}</u></a>
                 @endforeach
             </li>
         </ul>
