@@ -34,8 +34,7 @@ class CreateInitialTables extends Migration
             $table->unsignedInteger('valu_owner_id');
             $table->string('name');
             $table->text('description');
-            $table->unsignedInteger('target_va_lower')->nullable();
-            $table->unsignedInteger('target_va_upper')->nullable();
+            $table->string('condition');
             $table->date('registered_at');
             $table->date('period_start_at');
             $table->date('period_end_at');
