@@ -16,6 +16,7 @@ ENV COMPOSER_ALLOW_SUPERUSER = 1
 
 WORKDIR /workspace
 COPY ./ .
+RUN crontab docker_files/crontab
 RUN make -f docker-internal.mk setup
 RUN chown -R nginx:nginx *
 
