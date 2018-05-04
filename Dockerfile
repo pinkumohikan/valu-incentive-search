@@ -16,7 +16,8 @@ ENV COMPOSER_ALLOW_SUPERUSER = 1
 
 WORKDIR /workspace
 COPY ./ .
-RUN make -f prod.mk setup
+RUN crontab docker_files/crontab
+RUN make -f docker-internal.mk setup
 RUN chown -R nginx:nginx *
 
 ENTRYPOINT ["./docker_files/entry_point.sh"]

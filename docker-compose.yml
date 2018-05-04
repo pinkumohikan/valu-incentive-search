@@ -1,21 +1,28 @@
-version: '3'
+version: '2'
 
 services:
   app:
     build: ./
+    image: peanut-app:latest
+    labels:
+      com.pinkumohikan.valu-incentive-search.service: app
     ports:
-      - "8000:80"
+      - "127.0.0.1:$APP_PORT:80"
+    volumes:
+      - "./storage/logs:/workspace/storage/logs"
     networks:
       - valu-incentive-search
+    restart: always
 
   queue-worker:
-    image: valu-incentive-search_app
+    image: peanut-app:latest
     entrypoint: ""
     command: "php artisan queue:work --delay=3600 --tries=2 --timeout=30"
     depends_on:
       - app
     networks:
       - valu-incentive-search
+    restart: always
 
 networks:
   valu-incentive-search:

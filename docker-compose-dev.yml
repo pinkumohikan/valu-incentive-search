@@ -1,4 +1,4 @@
-version: '3'
+version: '2'
 
 services:
   dev-db:
@@ -17,6 +17,10 @@ services:
   app:
     volumes:
       - "./:/workspace" # コード変更を即座に反映させるため
+    restart: "no"
+
+  queue-worker:
+    restart: "no"
 
 networks:
   valu-incentive-search:
