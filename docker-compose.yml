@@ -7,7 +7,7 @@ services:
     labels:
       com.pinkumohikan.valu-incentive-search.service: app
     ports:
-      - "$APP_PORT:80"
+      - "127.0.0.1:$APP_PORT:80"
     networks:
       - valu-incentive-search
     restart: always
