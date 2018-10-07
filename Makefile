@@ -5,6 +5,7 @@ SERVICE_LABEL=com.pinkumohikan.valu-incentive-search.service
 dev/up:
 	cp .env.dev .env
 	docker-compose -f docker-compose.yml -f docker-compose-dev.yml up -d --build
+	$(MAKE) exec cmd="make -f docker-internal.mk setup"
 	$(MAKE) exec cmd="php artisan migrate --force"
 
 dev/down:
