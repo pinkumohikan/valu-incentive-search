@@ -2,6 +2,7 @@
 
 namespace Peanut\ValuIncentive;
 
+use Carbon\Carbon;
 use Illuminate\Support\Collection;
 
 class Finder
@@ -9,6 +10,7 @@ class Finder
     public function findNewly(int $limit = 10)
     {
         return ValuIncentive::join('display_permissions', 'valu_incentives.valu_owner_id', 'display_permissions.valu_owner_id')
+            ->where('period_end_at', '>=', Carbon::now())
             ->orderByDesc('valu_incentives.created_at')
             ->take($limit)
             ->select('valu_incentives.*')
@@ -19,6 +21,7 @@ class Finder
     {
         $valuOwnerIds = ValuIncentive::join('display_permissions', 'valu_incentives.valu_owner_id', 'display_permissions.valu_owner_id')
             ->join('valu_owners', 'valu_incentives.valu_owner_id', 'valu_owners.id')
+            ->where('period_end_at', '>=', Carbon::now())
             ->orderByDesc('valu_owners.watcher_count')
             ->groupBy('valu_owners.id', 'valu_owners.watcher_count')
             ->select('valu_owners.id')
@@ -33,6 +36,7 @@ class Finder
     {
         return ValuIncentive::join('display_permissions', 'valu_incentives.valu_owner_id', 'display_permissions.valu_owner_id')
             ->where('name', 'like', '%'.$keyword.'%')
+            ->where('period_end_at', '>=', Carbon::now())
             ->orWhere('description', 'like', '%'.$keyword.'%')
             ->select('valu_incentives.*')
             ->take(50)
@@ -42,6 +46,7 @@ class Finder
     public function findPeriodEndNearly()
     {
         return ValuIncentive::join('display_permissions', 'valu_incentives.valu_owner_id', 'display_permissions.valu_owner_id')
+            ->where('period_end_at', '>=', Carbon::now())
             ->orderBy('valu_incentives.period_end_at')
             ->select('valu_incentives.*')
             ->take(10)
@@ -51,6 +56,7 @@ class Finder
     public function countIncentives()
     {
         return ValuIncentive::join('display_permissions', 'valu_incentives.valu_owner_id', 'display_permissions.valu_owner_id')
+            ->where('period_end_at', '>=', Carbon::now())
             ->count();
     }
 
@@ -60,6 +66,7 @@ class Finder
 
         $ownerIds->each(function (int $ownerId) use ($found) {
             $incentive = ValuIncentive::where('valu_owner_id', $ownerId)
+                ->where('period_end_at', '>=', Carbon::now())
                 ->orderBy('created_at')
                 ->first();
             if (!$incentive) {
